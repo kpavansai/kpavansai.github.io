@@ -1,181 +1,626 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="css/animate.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <title>Pavan's Portfolio</title>
-  </head>
-  <body>
-    <div class="container navbar">
-      <header>
-        <div class="lgo">
-          <h1>Pavan</h1>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pavan Sai Kamatham — AI/ML Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080c14;
+      --bg2: #0d1117;
+      --surface: #111827;
+      --surface2: #1f2937;
+      --border: #1e3048;
+      --text: #f1f5f9;
+      --text-mid: #94a3b8;
+      --text-dim: #475569;
+      --cyan: #06b6d4;
+      --blue: #3b82f6;
+      --purple: #8b5cf6;
+      --green: #10b981;
+      --amber: #f59e0b;
+      --gradient: linear-gradient(135deg, #06b6d4, #3b82f6, #8b5cf6);
+      --card-border: rgba(6,182,212,0.15);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(6,182,212,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(6,182,212,0.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
 
-        <nav>
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(8,12,20,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(6,182,212,0.1);
+    }
+    .nav-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px; font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a { color: var(--text-mid); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-cta { padding: 8px 20px; border-radius: 8px; background: linear-gradient(135deg, rgba(6,182,212,0.15), rgba(59,130,246,0.15)); border: 1px solid rgba(6,182,212,0.3); color: var(--cyan) !important; font-weight: 600 !important; }
+    .nav-cta:hover { background: linear-gradient(135deg, rgba(6,182,212,0.3), rgba(59,130,246,0.3)) !important; }
+
+    /* HERO */
+    .hero-wrap { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; }
+    .hero { min-height: 100vh; display: flex; align-items: center; padding: 140px 48px 80px; }
+    .hero-content { max-width: 720px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 100px;
+      background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.25);
+      font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--cyan);
+      letter-spacing: 1px; text-transform: uppercase; margin-bottom: 28px;
+    }
+    .hero-badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+    .hero h1 { font-size: clamp(42px, 6vw, 72px); font-weight: 800; line-height: 1.1; margin-bottom: 8px; }
+    .hero h1 .name { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-role { font-size: clamp(18px, 2.5vw, 22px); color: var(--text-mid); font-weight: 400; margin-bottom: 24px; }
+    .hero-role .company { color: var(--cyan); font-weight: 600; }
+    .typing-wrapper { font-family: 'JetBrains Mono', monospace; font-size: 16px; color: var(--text-mid); margin-bottom: 32px; min-height: 28px; }
+    .typing-cursor { display: inline-block; width: 2px; height: 18px; background: var(--cyan); margin-left: 2px; vertical-align: middle; animation: blink 1s step-end infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    .hero-desc { font-size: 16px; color: var(--text-mid); max-width: 600px; margin-bottom: 40px; line-height: 1.8; }
+    .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 40px; }
+    .btn-primary { padding: 14px 28px; border-radius: 10px; background: var(--gradient); color: white; font-weight: 600; font-size: 15px; text-decoration: none; transition: opacity 0.2s, transform 0.2s; }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); }
+    .btn-secondary { padding: 14px 28px; border-radius: 10px; background: transparent; border: 1px solid var(--border); color: var(--text); font-weight: 500; font-size: 15px; text-decoration: none; transition: border-color 0.2s, transform 0.2s; }
+    .btn-secondary:hover { border-color: var(--cyan); color: var(--cyan); transform: translateY(-2px); }
+    .hero-socials { display: flex; gap: 12px; margin-bottom: 48px; }
+    .social-link { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); color: var(--text-mid); text-decoration: none; transition: all 0.2s; }
+    .social-link:hover { border-color: var(--cyan); color: var(--cyan); transform: translateY(-2px); }
+    .hero-stats { display: flex; gap: 40px; padding-top: 40px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+    .stat-num { font-size: 32px; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .stat-label { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+    /* SECTIONS */
+    .section-wrap { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; }
+    .section-inner { padding: 100px 48px; }
+    .section-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--cyan); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
+    .section-title { font-size: clamp(28px, 4vw, 42px); font-weight: 800; margin-bottom: 16px; }
+    .section-sub { font-size: 16px; color: var(--text-mid); max-width: 580px; margin-bottom: 56px; }
+    .section-divider { max-width: 1200px; margin: 0 auto; height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); }
+
+    /* TIMELINE */
+    .timeline { position: relative; }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(180deg, var(--cyan), var(--purple), transparent); }
+    .timeline-item { position: relative; padding-left: 48px; margin-bottom: 56px; }
+    .timeline-dot { position: absolute; left: -7px; top: 6px; width: 15px; height: 15px; border-radius: 50%; background: var(--bg); border: 2px solid var(--cyan); box-shadow: 0 0 12px rgba(6,182,212,0.4); }
+    .timeline-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
+    .timeline-company { font-size: 18px; font-weight: 700; }
+    .timeline-badge { padding: 3px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; font-family: 'JetBrains Mono', monospace; }
+    .badge-current { background: rgba(16,185,129,0.15); color: var(--green); border: 1px solid rgba(16,185,129,0.3); }
+    .badge-past { background: rgba(100,116,139,0.15); color: var(--text-mid); border: 1px solid var(--border); }
+    .timeline-role { font-size: 15px; color: var(--cyan); font-weight: 600; margin-bottom: 4px; }
+    .timeline-date { font-size: 13px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; margin-bottom: 16px; }
+    .timeline-card { background: var(--surface); border: 1px solid var(--card-border); border-radius: 12px; padding: 24px; }
+    .timeline-card ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .timeline-card li { font-size: 14px; color: var(--text-mid); line-height: 1.6; padding-left: 18px; position: relative; }
+    .timeline-card li::before { content: '▹'; position: absolute; left: 0; color: var(--cyan); }
+    .timeline-card li strong { color: var(--text); }
+    .timeline-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+    .tag { padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 500; font-family: 'JetBrains Mono', monospace; background: rgba(59,130,246,0.1); color: #60a5fa; border: 1px solid rgba(59,130,246,0.2); }
+
+    /* SKILLS */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+    .skill-group { background: var(--surface); border: 1px solid var(--card-border); border-radius: 12px; padding: 24px; transition: border-color 0.2s, transform 0.2s; }
+    .skill-group:hover { border-color: rgba(6,182,212,0.35); transform: translateY(-4px); }
+    .skill-group-title { font-size: 13px; font-weight: 700; font-family: 'JetBrains Mono', monospace; letter-spacing: 1.5px; text-transform: uppercase; color: var(--cyan); margin-bottom: 16px; }
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-pill { padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 500; background: var(--surface2); border: 1px solid var(--border); color: var(--text-mid); transition: all 0.2s; }
+    .skill-pill:hover { border-color: var(--cyan); color: var(--text); }
+
+    /* PROJECTS */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+    .project-card { background: var(--surface); border: 1px solid var(--card-border); border-radius: 14px; padding: 28px; display: flex; flex-direction: column; transition: border-color 0.2s, transform 0.2s; text-decoration: none; }
+    .project-card:hover { border-color: rgba(6,182,212,0.4); transform: translateY(-6px); }
+    .project-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 16px; }
+    .project-name { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .project-desc { font-size: 14px; color: var(--text-mid); line-height: 1.7; flex: 1; margin-bottom: 20px; }
+    .project-footer { display: flex; align-items: center; justify-content: space-between; }
+    .project-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .project-tag { padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+    .project-link { font-size: 13px; color: var(--cyan); font-weight: 600; }
+
+    /* BLOG */
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+    .blog-card { background: var(--surface); border: 1px solid var(--card-border); border-radius: 14px; padding: 28px; text-decoration: none; transition: border-color 0.2s, transform 0.2s; display: flex; flex-direction: column; }
+    .blog-card:hover { border-color: rgba(139,92,246,0.4); transform: translateY(-6px); }
+    .blog-tag { display: inline-block; padding: 4px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 14px; font-family: 'JetBrains Mono', monospace; }
+    .blog-title { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 10px; line-height: 1.4; }
+    .blog-desc { font-size: 14px; color: var(--text-mid); line-height: 1.7; flex: 1; margin-bottom: 20px; }
+    .blog-footer { display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; }
+    .blog-read { color: var(--purple); font-weight: 600; }
+
+    /* EDUCATION */
+    .edu-card { background: var(--surface); border: 1px solid var(--card-border); border-radius: 14px; padding: 32px; display: flex; gap: 24px; align-items: flex-start; }
+    .edu-icon { width: 56px; height: 56px; border-radius: 12px; background: linear-gradient(135deg, rgba(6,182,212,0.2), rgba(59,130,246,0.2)); border: 1px solid rgba(6,182,212,0.3); display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; }
+    .edu-school { font-size: 19px; font-weight: 700; margin-bottom: 4px; }
+    .edu-degree { font-size: 15px; color: var(--cyan); font-weight: 600; margin-bottom: 6px; }
+    .edu-dates { font-size: 13px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; margin-bottom: 12px; }
+    .edu-courses { font-size: 14px; color: var(--text-mid); line-height: 1.6; }
+
+    /* AWARDS */
+    .awards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .award-card { background: var(--surface); border: 1px solid var(--card-border); border-radius: 12px; padding: 24px; display: flex; gap: 16px; align-items: flex-start; }
+    .award-icon { font-size: 28px; flex-shrink: 0; }
+    .award-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .award-desc { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
+
+    /* CONTACT */
+    .contact-wrapper { background: var(--surface); border: 1px solid var(--card-border); border-radius: 16px; padding: 56px; text-align: center; }
+    .contact-title { font-size: 32px; font-weight: 800; margin-bottom: 16px; }
+    .contact-desc { font-size: 16px; color: var(--text-mid); max-width: 500px; margin: 0 auto 36px; }
+    .contact-links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .contact-link { display: flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 10px; font-size: 14px; font-weight: 600; text-decoration: none; border: 1px solid var(--border); color: var(--text-mid); transition: all 0.2s; }
+    .contact-link:hover { border-color: var(--cyan); color: var(--cyan); transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer { position: relative; z-index: 1; text-align: center; padding: 32px 48px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; }
+    footer span { color: var(--cyan); }
+
+    /* ANIMATIONS */
+    .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .hero { padding: 100px 24px 60px; }
+      .section-inner { padding: 80px 24px; }
+      .hero-stats { gap: 24px; }
+      .edu-card { flex-direction: column; }
+      .contact-wrapper { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">pavan.dev</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero-wrap">
+  <div class="hero" id="about">
+    <div class="hero-content">
+      <div class="hero-badge">Open to Senior AI/ML Roles</div>
+      <h1>Hi, I'm <span class="name">Pavan Sai</span><br>Kamatham</h1>
+      <p class="hero-role">Senior Applied AI/ML Associate at <span class="company">JP Morgan Chase</span></p>
+      <div class="typing-wrapper"><span id="typed-text"></span><span class="typing-cursor"></span></div>
+      <p class="hero-desc">6+ years building production-grade Agentic AI systems, LLM pipelines, and multi-agent architectures across Finance, Healthcare, and Technology. IIT Madras alumnus passionate about pushing the frontier of applied AI.</p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn-primary">View Projects</a>
+        <a href="#contact" class="btn-secondary">Get in Touch</a>
+      </div>
+      <div class="hero-socials">
+        <a href="https://linkedin.com/in/kpavansai" target="_blank" class="social-link" title="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+        </a>
+        <a href="https://github.com/kpavansai" target="_blank" class="social-link" title="GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 002 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"/></svg>
+        </a>
+        <a href="https://kpavansai.medium.com" target="_blank" class="social-link" title="Medium">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+        </a>
+        <a href="mailto:kpavan.sai1@gmail.com" class="social-link" title="Email">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item"><div class="stat-num">6+</div><div class="stat-label">Years Experience</div></div>
+        <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">Companies</div></div>
+        <div class="stat-item"><div class="stat-num">10+</div><div class="stat-label">GitHub Projects</div></div>
+        <div class="stat-item"><div class="stat-num">IIT</div><div class="stat-label">Madras Alumnus</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- EXPERIENCE -->
+<div class="section-wrap">
+  <div class="section-inner fade-up" id="experience">
+    <div class="section-label">// career journey</div>
+    <h2 class="section-title">Work Experience</h2>
+    <p class="section-sub">Building production AI systems across finance, healthcare, and technology for 6+ years.</p>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-meta">
+          <span class="timeline-company">JP Morgan Chase</span>
+          <span class="timeline-badge badge-current">● Current</span>
+        </div>
+        <div class="timeline-role">Senior Applied AI/ML Associate</div>
+        <div class="timeline-date">Aug 2024 – Present · Bangalore, India</div>
+        <div class="timeline-card">
           <ul>
-            <li><a href="about">about me</a></li>
-            <li><a href="skills">skills</a></li>
-            <li><a href="work">my work</a></li>
+            <li>Led and mentored <strong>3 interns</strong> through AI architectures, agentic workflows, and AzureOpenAI integrations across critical components.</li>
+            <li>Designing a <strong>Multi-Agent system</strong> connecting Confluence MCP server to generate synthetic, business-friendly knowledge using meta-prompting techniques.</li>
+            <li>Built custom <strong>MCP servers</strong> to enhance tool calling, minimizing direct database queries and improving system efficiency.</li>
+            <li>Developed a customized <strong>LLM-metadata logging module</strong> to capture and track all agentic-LLM interactions, enabling accountability and usage analytics.</li>
+            <li>Revamped multi-agent workflows using <strong>LangGraph</strong> with hybrid routing (semantic + supervisor) to improve inter-agent communication quality.</li>
+            <li>Researched and implemented <strong>Agentic RAG retrieval system</strong> with optimized indexing and embedding strategies.</li>
           </ul>
-        </nav>
-      </header>
-    </div>
-
-
-
-
-    <div class="container main-info-section">
-      <div class="text">
-        <h1>
-          <span>H</span>
-          <span class="m-left">i</span>
-          <span class="m-left">,</span>
-          <br>
-          <span>I</span>
-          <span class="m-left">'</span>
-          <span class="m-left">m</span>
-          <span class="name">P</span>
-          <span class="m-left name">a</span>
-          <span class="m-left name">v</span>
-          <span class="m-left name">a</span>
-          <span class="m-left name">n</span>
-          <span class="m-left">,</span>
-          <br>
-          <span>D</span>
-          <span class="m-left">a</span>
-          <span class="m-left">t</span>
-          <span class="m-left">a</span>
-          <span>S</span>
-          <span class="m-left">c</span>
-          <span class="m-left">i</span>
-          <span class="m-left">e</span>
-          <span class="m-left">n</span>
-          <span class="m-left">t</span>
-          <span class="m-left">i</span>
-          <span class="m-left">s</span>
-          <span class="m-left">t</span>
-          <span class="m-left">.</span>
-       </h1>
-       <p>Machine Learning | Google Cloud | Kubeflow</p>
-       <a href="#contact">contact me</a>
-      </div>
-      <div class="profile-image">
-        <img src="img/real.jpg" alt="">
-      </div>
-    </div>
-
-
-    <div class="container about" id="about">
-      <h1>About</h1>
-      <div class="about-me-info">
-        <p>As a Data Scientist at Virtusa Corporation, I have been working on building 
-          and developing deployable AIML solutions to showcase our company's Data Science 
-          capabilities to our customers.</p>
-          <p>With the exposure to Google Cloud Platform, I have worked around AI Platform 
-            and Kubeflow pipelines extensively.</p>
-      </div>
-      <img src="img/dotted-shape.png" alt="">
-    </div>
-
-
-    <div class="container skills" id="skills">
-      <h1>Skills</h1>
-      <p class="skills-info"> In the process of developing Machine learning models, 
-        I have explored around Classification and Regression models to classify and predict the outputs. Further ahead, 
-        I have experience with BERT NLP model which was used to classify the text related samples for our required predictions. 
-        I have used Kubeflow ML pipelines to deploy and retrain our machine learning solution.
-      </p>
-      <div class="html">
-        <div class="tag-html">
-          <p>PYTHON</p>
-        </div>
-        <div class="progressbar">
-          <div class="bar-html"></div>
+          <div class="timeline-tags">
+            <span class="tag">Multi-Agent Systems</span><span class="tag">MCP Servers</span><span class="tag">LangGraph</span><span class="tag">AzureOpenAI</span><span class="tag">Agentic RAG</span><span class="tag">Claude Code</span>
+          </div>
         </div>
       </div>
-      <div class="html">
-        <div class="tag-css">
-          <p>TERRAFORM</p>
+
+      <div class="timeline-item">
+        <div class="timeline-dot" style="border-color:var(--blue);box-shadow:0 0 12px rgba(59,130,246,0.4);"></div>
+        <div class="timeline-meta">
+          <span class="timeline-company">Carelon Global Solutions</span>
+          <span class="timeline-badge badge-past">Oct 2022 – Jul 2024</span>
         </div>
-        <div class="progressbar">
-          <div class="bar-css"></div>
+        <div class="timeline-role">Software Engineer III (AI)</div>
+        <div class="timeline-date">Oct 2022 – Jul 2024 · Bangalore, India</div>
+        <div class="timeline-card">
+          <ul>
+            <li>Built <strong>RAG-Evaluation framework</strong> for retrieval assessment and re-ranking, optimizing AzureOpenAI response quality for healthcare claim documents.</li>
+            <li>Developed a <strong>Document Retrieval System</strong> integrating relevant medical histories using LLMs for efficient claim analysis and faster patient care.</li>
+            <li>Designed end-to-end <strong>Healthcare Claims Analyzer</strong> using AzureOpenAI + Transformers achieving <strong>88% precision</strong> in claim classification.</li>
+            <li>Enhanced async API calls in <strong>AI Claims Examiner</strong> automating manual process for <strong>~50,000 claims/day</strong>.</li>
+            <li>Architected data pipelines to extract, transform, and store patient-care data in <strong>MongoDB</strong> for ML model training and validation.</li>
+          </ul>
+          <div class="timeline-tags">
+            <span class="tag">RAG</span><span class="tag">AzureOpenAI</span><span class="tag">Transformers</span><span class="tag">Healthcare AI</span><span class="tag">MongoDB</span><span class="tag">LLMs</span>
+          </div>
         </div>
       </div>
-      <div class="html">
-        <div class="tag-javascript">
-          <p>SQL</p>
+
+      <div class="timeline-item">
+        <div class="timeline-dot" style="border-color:var(--purple);box-shadow:0 0 12px rgba(139,92,246,0.4);"></div>
+        <div class="timeline-meta">
+          <span class="timeline-company">Virtusa Consulting Services</span>
+          <span class="timeline-badge badge-past">Jul 2019 – Sep 2022</span>
         </div>
-        <div class="progressbar">
-          <div class="bar-javascript"></div>
-        </div>
-      </div>
-      <div class="html">
-        <div class="tag-react">
-          <p>HTML&CSS</p>
-        </div>
-        <div class="progressbar">
-          <div class="bar-react"></div>
+        <div class="timeline-role">Associate Consultant (AI/ML)</div>
+        <div class="timeline-date">Jul 2019 – Sep 2022 · Hyderabad, India</div>
+        <div class="timeline-card">
+          <ul>
+            <li>Led a team of <strong>6 ML interns</strong> developing end-to-end AI-enabled proof-of-concept solutions.</li>
+            <li>Built <strong>Auto-Triaging system</strong> using Transformers, boosting model accuracy from <strong>69% → 81%</strong> by reducing false positives.</li>
+            <li>Built in-house <strong>AI-Observability platform</strong> to monitor production ML models and ensure optimal performance.</li>
+            <li>Deployed ML models into <strong>Google Cloud VM instances</strong> with end-to-end MLOps pipelines for training, serving, and versioning.</li>
+            <li>Applied <strong>NLP and re-trained ML models</strong> to automate IT service tasks, improving delivery speed and efficiency.</li>
+          </ul>
+          <div class="timeline-tags">
+            <span class="tag">NLP</span><span class="tag">Transformers</span><span class="tag">Google Cloud</span><span class="tag">MLOps</span><span class="tag">Kubeflow</span><span class="tag">AI Observability</span>
+          </div>
         </div>
       </div>
 
     </div>
+  </div>
+</div>
 
-    <div class="container work" id="work">
-      <h1>work</h1>
-      <div class="work-category">
-        <button id="designing" class="active" onclick="showRequiredCategory(this)">Projects</button>
-        <button id="animation" onclick="showRequiredCategory(this)">Articles</button>
-        <button id="project" onclick="showRequiredCategory(this)">Other</button>
+<div class="section-divider"></div>
+
+<!-- SKILLS -->
+<div class="section-wrap">
+  <div class="section-inner fade-up" id="skills">
+    <div class="section-label">// what I work with</div>
+    <h2 class="section-title">Skills & Technologies</h2>
+    <p class="section-sub">A comprehensive toolkit built across 6+ years of production AI/ML engineering.</p>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">🤖 Core AI/ML</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Generative AI</span><span class="skill-pill">Large Language Models</span><span class="skill-pill">NLP</span><span class="skill-pill">Machine Learning</span><span class="skill-pill">Deep Learning</span><span class="skill-pill">RAG Systems</span><span class="skill-pill">Agentic AI</span><span class="skill-pill">Multi-Agent Systems</span>
+        </div>
       </div>
-      <div class="category-designing showCategory">
-        <a href=""><img src="img/1.png"></a>
-        <a href=""><img src="img/2.png"></a>
-        <a href=""><img src="img/3.png"></a>
-        <a href=""><img src="img/2.png"></a>
-        <a href=""><img src="img/3.png"></a>
+      <div class="skill-group">
+        <div class="skill-group-title">🛠 AI Frameworks</div>
+        <div class="skill-pills">
+          <span class="skill-pill">LangChain</span><span class="skill-pill">LangGraph</span><span class="skill-pill">LlamaIndex</span><span class="skill-pill">HuggingFace</span><span class="skill-pill">OpenAI SDK</span><span class="skill-pill">TensorFlow</span><span class="skill-pill">Scikit-Learn</span><span class="skill-pill">Claude Code</span>
+        </div>
       </div>
-      <div class="category-animation hideCategory">
-        <a href=""><img src="img/1.png"></a>
-        <a href=""><img src="img/2.png"></a>
-        <a href=""><img src="img/3.png"></a>
+      <div class="skill-group">
+        <div class="skill-group-title">☁️ Cloud & MLOps</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Azure OpenAI</span><span class="skill-pill">Google Cloud</span><span class="skill-pill">Kubeflow</span><span class="skill-pill">Kubernetes</span><span class="skill-pill">Airflow</span><span class="skill-pill">Terraform</span><span class="skill-pill">GKE</span><span class="skill-pill">MLOps</span>
+        </div>
       </div>
-      <div class="category-project hideCategory">
-        <a href=""><img src="img/1.png"></a>
-        <a href=""><img src="img/2.png"></a>
-        <a href=""><img src="img/3.png"></a>
-        <a href=""><img src="img/2.png"></a>
+      <div class="skill-group">
+        <div class="skill-group-title">🗄 Data & Tools</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Python</span><span class="skill-pill">SQL</span><span class="skill-pill">FastAPI</span><span class="skill-pill">Streamlit</span><span class="skill-pill">MongoDB</span><span class="skill-pill">Snowflake</span><span class="skill-pill">PostgreSQL</span><span class="skill-pill">MySQL</span>
+        </div>
       </div>
     </div>
+  </div>
+</div>
 
-    <div class="container contact" id="contact">
-      <h1>Contact</h1>
-      <form>
-        <input type="text" name="name" placeholder="Full Name">
-        <input type="email" placeholder="Email">
-        <input type="email" placeholder="PortfolioPersonEmail@gmail.com" disabled>
-        <textarea name="message" cols="30" rows="10" placeholder="Message"></textarea>
-        <input type="submit">
-      </form>
+<div class="section-divider"></div>
+
+<!-- PROJECTS -->
+<div class="section-wrap">
+  <div class="section-inner fade-up" id="projects">
+    <div class="section-label">// things I've built</div>
+    <h2 class="section-title">Featured Projects</h2>
+    <p class="section-sub">Production-grade AI systems and research projects — from research to deployment.</p>
+    <div class="projects-grid">
+
+      <a href="https://kpavansai.github.io/aiops-rca-guides/" target="_blank" class="project-card">
+        <div class="project-icon" style="background:rgba(6,182,212,0.15);border:1px solid rgba(6,182,212,0.3);">🔍</div>
+        <div class="project-name">AIOps RCA Multi-Agent System</div>
+        <div class="project-desc">Interactive architecture guides for multi-agent root cause analysis. Covers Beam Search + Shared Blackboard and Bidirectional A* with live heuristics. Research-backed with 17 peer-reviewed citations. Live on GitHub Pages.</div>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="project-tag" style="background:rgba(6,182,212,0.1);color:#22d3ee;">Multi-Agent</span>
+            <span class="project-tag" style="background:rgba(59,130,246,0.1);color:#60a5fa;">Claude Code</span>
+            <span class="project-tag" style="background:rgba(139,92,246,0.1);color:#a78bfa;">AIOps</span>
+          </div>
+          <span class="project-link">Live →</span>
+        </div>
+      </a>
+
+      <a href="https://github.com/kpavansai/climate-constellation" target="_blank" class="project-card">
+        <div class="project-icon" style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);">🌍</div>
+        <div class="project-name">Climate Constellation</div>
+        <div class="project-desc">Parallel multi-agent climate intelligence dashboard. Multiple specialized agents analyze climate data from diverse sources simultaneously, aggregating insights into a unified intelligence view.</div>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="project-tag" style="background:rgba(16,185,129,0.1);color:#34d399;">Agents</span>
+            <span class="project-tag" style="background:rgba(6,182,212,0.1);color:#22d3ee;">Climate AI</span>
+          </div>
+          <span class="project-link">GitHub →</span>
+        </div>
+      </a>
+
+      <a href="https://github.com/kpavansai/Deploy-Machine-Learning-Model-on-Kubernetes" target="_blank" class="project-card">
+        <div class="project-icon" style="background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);">⚙️</div>
+        <div class="project-name">ML Model on Kubernetes</div>
+        <div class="project-desc">End-to-end ML model deployment using Kubernetes. Demonstrates production MLOps patterns: containerization, auto-scaling, health checks, and rolling updates for ML serving.</div>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="project-tag" style="background:rgba(59,130,246,0.1);color:#60a5fa;">Kubernetes</span>
+            <span class="project-tag" style="background:rgba(245,158,11,0.1);color:#fcd34d;">MLOps</span>
+          </div>
+          <span class="project-link">GitHub →</span>
+        </div>
+      </a>
+
+      <a href="https://github.com/kpavansai/text-summarizer" target="_blank" class="project-card">
+        <div class="project-icon" style="background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.3);">📝</div>
+        <div class="project-name">LLM Text Summarizer</div>
+        <div class="project-desc">Abstractive text summarization using HuggingFace transformer models. Configurable length controls and support for multiple document formats. Built before LLM APIs became mainstream.</div>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="project-tag" style="background:rgba(139,92,246,0.1);color:#a78bfa;">HuggingFace</span>
+            <span class="project-tag" style="background:rgba(16,185,129,0.1);color:#34d399;">NLP</span>
+          </div>
+          <span class="project-link">GitHub →</span>
+        </div>
+      </a>
+
+      <a href="https://github.com/kpavansai/Image-Captioning-Analysis" target="_blank" class="project-card">
+        <div class="project-icon" style="background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);">🖼️</div>
+        <div class="project-name">Image Captioning Analysis</div>
+        <div class="project-desc">Deep learning image captioning combining CNN feature extraction with sequence generation. Includes BLEU/METEOR evaluation metrics and attention map visualization.</div>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="project-tag" style="background:rgba(245,158,11,0.1);color:#fcd34d;">Computer Vision</span>
+            <span class="project-tag" style="background:rgba(59,130,246,0.1);color:#60a5fa;">CNN</span>
+          </div>
+          <span class="project-link">GitHub →</span>
+        </div>
+      </a>
+
+      <a href="https://github.com/kpavansai/Terraform-GKE-Modules" target="_blank" class="project-card">
+        <div class="project-icon" style="background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);">🏗️</div>
+        <div class="project-name">Terraform GKE Modules</div>
+        <div class="project-desc">Reusable Terraform modules for provisioning Google Kubernetes Engine clusters. Includes node pool configs, networking, IAM roles, and auto-scaling for production GKE deployments.</div>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="project-tag" style="background:rgba(239,68,68,0.1);color:#fca5a5;">Terraform</span>
+            <span class="project-tag" style="background:rgba(16,185,129,0.1);color:#34d399;">GKE</span>
+          </div>
+          <span class="project-link">GitHub →</span>
+        </div>
+      </a>
+
     </div>
+  </div>
+</div>
 
-    <footer>
-      <hr>
-      <p>2021 Copyright. All Rights are not Reserved.</p>
-    </footer>
+<div class="section-divider"></div>
 
+<!-- BLOG -->
+<div class="section-wrap">
+  <div class="section-inner fade-up" id="blog">
+    <div class="section-label">// thoughts & research</div>
+    <h2 class="section-title">Blog & Writing</h2>
+    <p class="section-sub">Deep dives into AI/ML architecture, multi-agent systems, and production engineering on <a href="https://kpavansai.medium.com" target="_blank" style="color:var(--cyan);text-decoration:none;">Medium ↗</a></p>
+    <div class="blog-grid">
 
+      <a href="https://kpavansai.medium.com/why-multi-agent-aiops-rca-fails-at-scale-and-how-a-beam-search-and-shared-blackboards-fix-it-25ddac45d3a2" target="_blank" class="blog-card">
+        <span class="blog-tag" style="background:rgba(6,182,212,0.1);color:var(--cyan);border:1px solid rgba(6,182,212,0.2);">AIOps · Multi-Agent</span>
+        <div class="blog-title">Why Multi-Agent AIOps RCA Fails at Scale — And How Beam Search & Shared Blackboards Fix It</div>
+        <div class="blog-desc">Why naive multi-agent fan-out fails for root cause analysis. Covers Bidirectional Dijkstra, Beam Search with shared blackboard state, and Bidirectional A* with live heuristics — all research-backed.</div>
+        <div class="blog-footer">
+          <span>Apr 2026 · 21 min read</span>
+          <span class="blog-read">Read on Medium →</span>
+        </div>
+      </a>
 
+      <a href="https://kpavansai.github.io/aiops-rca-guides/aiops-rca-architecture.html" target="_blank" class="blog-card">
+        <span class="blog-tag" style="background:rgba(139,92,246,0.1);color:var(--purple);border:1px solid rgba(139,92,246,0.2);">Interactive Guide</span>
+        <div class="blog-title">RCA Agent Architecture Comparison — Interactive Visual Reference</div>
+        <div class="blog-desc">An interactive tabbed guide comparing 4 multi-agent RCA architectures with live performance metrics, SVG flow diagrams, and a full decision matrix. Built in pure HTML/CSS/JS.</div>
+        <div class="blog-footer">
+          <span>Apr 2026 · Interactive</span>
+          <span class="blog-read">Explore →</span>
+        </div>
+      </a>
 
+      <a href="https://kpavansai.github.io/aiops-rca-guides/aiops-rca-complete-guide.html" target="_blank" class="blog-card">
+        <span class="blog-tag" style="background:rgba(16,185,129,0.1);color:var(--green);border:1px solid rgba(16,185,129,0.2);">Research · Deep Dive</span>
+        <div class="blog-title">Search Algorithms for Multi-Agent AIOps RCA: Complete Technical Guide</div>
+        <div class="blog-desc">11-section research guide covering all 4 algorithms with production Claude Code architecture, token cost optimizations, and 17 peer-reviewed citations from ICLR, WWW, NeurIPS, and Springer.</div>
+        <div class="blog-footer">
+          <span>Apr 2026 · 35 min read</span>
+          <span class="blog-read">Read Guide →</span>
+        </div>
+      </a>
 
-    <script src="js/ScrollMagic.min.js"></script>
-    <script src="js/animation.gsap.min.js"></script>
-    <script src="js/TimelineLite.min.js"></script>
-    <script src="js/TweenMax.min.js"></script>
-    <script src="js/CSSPlugin.min.js"></script>
-    <script src="js/script.js"></script>
-  </body>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- EDUCATION -->
+<div class="section-wrap">
+  <div class="section-inner fade-up" id="education">
+    <div class="section-label">// academic background</div>
+    <h2 class="section-title">Education</h2>
+    <p class="section-sub" style="margin-bottom:32px;">Engineering foundation from one of India's premier technical institutions.</p>
+    <div class="edu-card">
+      <div class="edu-icon">🎓</div>
+      <div>
+        <div class="edu-school">Indian Institute of Technology (IIT), Madras</div>
+        <div class="edu-degree">B.Tech in Aerospace Engineering</div>
+        <div class="edu-dates">July 2015 – May 2019</div>
+        <div class="edu-courses">
+          <strong style="color:var(--text-mid);font-size:12px;font-family:'JetBrains Mono',monospace;letter-spacing:1px;text-transform:uppercase;">Relevant Coursework</strong><br><br>
+          Machine Learning for Science, Engineering & Applications · Deep Learning for Visual Computing · Data Structures & Algorithms using Python · Probability and Statistics
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- AWARDS -->
+<div class="section-wrap">
+  <div class="section-inner fade-up" style="padding-top:60px;">
+    <div class="section-label">// recognition</div>
+    <h2 class="section-title">Awards & Recognition</h2>
+    <div class="awards-grid">
+      <div class="award-card">
+        <div class="award-icon">🚀</div>
+        <div>
+          <div class="award-title">Carelon Innovation Team — Core Member</div>
+          <div class="award-desc">Selected as a core member of the Carelon Innovation Team focused on launching Generative AI projects in 2023. Led exploration and delivery of cutting-edge GenAI solutions for healthcare.</div>
+        </div>
+      </div>
+      <div class="award-card">
+        <div class="award-icon">🏆</div>
+        <div>
+          <div class="award-title">Top Performer Bonus — Virtusa (2021–22)</div>
+          <div class="award-desc">Earned Top Performer Bonus as recognition for excellent performance and high-impact AI solutions delivery at Virtusa Consulting Services in 2021-22.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- CONTACT -->
+<div class="section-wrap">
+  <div class="section-inner fade-up" id="contact">
+    <div class="contact-wrapper">
+      <div class="section-label" style="margin-bottom:16px;">// let's connect</div>
+      <h2 class="contact-title">Get In Touch</h2>
+      <p class="contact-desc">Open to senior AI/ML engineering roles, research collaborations, and conversations about agentic AI systems and production LLM architecture.</p>
+      <div class="contact-links">
+        <a href="mailto:kpavan.sai1@gmail.com" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          kpavan.sai1@gmail.com
+        </a>
+        <a href="https://linkedin.com/in/kpavansai" target="_blank" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/kpavansai" target="_blank" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 002 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"/></svg>
+          GitHub
+        </a>
+        <a href="https://kpavansai.medium.com" target="_blank" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+          Medium Blog
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span>Pavan Sai Kamatham</span> · Senior Applied AI/ML Associate @ JP Morgan Chase · IIT Madras · Bangalore, India
+</footer>
+
+<script>
+  // TYPING ANIMATION
+  const phrases = [
+    'Building multi-agent AI systems...',
+    'Designing Agentic RAG pipelines...',
+    'Engineering LLMs @ JP Morgan Chase...',
+    'IIT Madras Alumnus · B.Tech Aerospace...',
+    'LangGraph · LangChain · Claude Code...',
+    'Turning research into production AI...',
+  ];
+  let phraseIdx = 0, charIdx = 0, deleting = false;
+  const el = document.getElementById('typed-text');
+  function type() {
+    const current = phrases[phraseIdx];
+    if (!deleting) {
+      el.textContent = current.slice(0, ++charIdx);
+      if (charIdx === current.length) { deleting = true; setTimeout(type, 1800); return; }
+    } else {
+      el.textContent = current.slice(0, --charIdx);
+      if (charIdx === 0) { deleting = false; phraseIdx = (phraseIdx + 1) % phrases.length; }
+    }
+    setTimeout(type, deleting ? 40 : 70);
+  }
+  type();
+
+  // SCROLL ANIMATIONS
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
 </html>
