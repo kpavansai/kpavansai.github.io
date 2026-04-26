@@ -8,14 +8,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg:       #f2f2f2;
-      --card:     #ffffff;
-      --border:   #e2e2e2;
-      --text:     #141414;
-      --mid:      #606060;
-      --dim:      #aaaaaa;
-      --accent:   #1a1a1a;
-      --dot:      rgba(0,0,0,0.18);
+      --bg:     #f0f0f0;
+      --card:   #ffffff;
+      --border: #dedede;
+      --text:   #111111;
+      --mid:    #585858;
+      --dim:    #aaaaaa;
+      --accent: #111111;
+      --dot:    rgba(0,0,0,0.18);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -35,220 +35,182 @@
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: center;
-      padding: 0 48px; height: 58px;
-      background: rgba(242,242,242,0.9);
+      height: 56px; padding: 0 40px;
+      background: rgba(240,240,240,0.92);
       backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
     }
-    .nav-links { display: flex; gap: 32px; list-style: none; }
-    .nav-links a { color: var(--mid); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.2px; transition: color 0.18s; }
+    .nav-links { display: flex; gap: 30px; list-style: none; }
+    .nav-links a { color: var(--mid); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.15s; }
     .nav-links a:hover { color: var(--accent); }
-    .nav-cta {
-      padding: 6px 16px; border-radius: 4px;
-      background: var(--accent) !important; color: #fff !important;
-      font-weight: 600 !important; transition: opacity 0.18s !important;
-    }
-    .nav-cta:hover { opacity: 0.8 !important; color: #fff !important; }
+    .nav-cta { padding: 5px 15px; border-radius: 4px; background: var(--accent) !important; color: #fff !important; font-weight: 600 !important; transition: opacity 0.15s !important; }
+    .nav-cta:hover { opacity: 0.78 !important; }
 
-    /* LAYOUT */
-    .page { max-width: 860px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 1; }
+    /* PAGE */
+    .page { max-width: 900px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 1; }
 
-    /* HERO */
+    /* ── HERO ── */
     .hero {
-      min-height: 100vh; display: flex; flex-direction: column;
-      justify-content: center; padding: 100px 0 72px;
+      min-height: 100vh; display: flex; align-items: center;
+      justify-content: space-between; gap: 40px; padding: 96px 0 72px;
     }
+    .hero-left { flex: 1; min-width: 0; }
+    .hero-right { flex-shrink: 0; width: 280px; display: flex; align-items: center; justify-content: center; }
     .hero-eyebrow {
-      font-family: 'JetBrains Mono', monospace; font-size: 11px;
-      color: var(--dim); letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 22px;
+      font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
+      color: var(--dim); letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 20px;
+      display: flex; align-items: center; gap: 8px;
     }
+    .hero-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--dim); }
     .hero h1 {
       font-family: 'Lora', serif; font-weight: 700;
-      font-size: clamp(36px, 5vw, 58px); line-height: 1.12; margin-bottom: 14px; color: var(--text);
+      font-size: clamp(34px, 4.5vw, 54px); line-height: 1.1; margin-bottom: 14px;
     }
-    .hero-sub { font-size: 17px; color: var(--mid); margin-bottom: 10px; }
-    .hero-sub strong { color: var(--text); font-weight: 600; }
-    .hero-typing {
-      font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--dim);
-      margin-bottom: 28px; min-height: 22px;
-    }
-    .typing-cursor {
-      display: inline-block; width: 1.5px; height: 13px;
-      background: var(--dim); margin-left: 1px; vertical-align: middle;
-      animation: blink 1s step-end infinite;
-    }
+    .hero-sub { font-size: 15px; color: var(--mid); margin-bottom: 8px; }
+    .hero-sub strong { color: var(--text); }
+    .hero-typing { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--dim); margin-bottom: 22px; min-height: 20px; }
+    .cursor { display: inline-block; width: 1.5px; height: 13px; background: var(--dim); margin-left: 1px; vertical-align: middle; animation: blink 1s step-end infinite; }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-    .hero-desc { font-size: 15px; color: var(--mid); max-width: 540px; margin-bottom: 32px; line-height: 1.8; }
-    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
-    .btn {
-      padding: 10px 22px; border-radius: 4px; font-size: 13px; font-weight: 600;
-      text-decoration: none; transition: opacity 0.18s, transform 0.18s;
-    }
+    .hero-desc { font-size: 14px; color: var(--mid); max-width: 480px; margin-bottom: 28px; line-height: 1.8; }
+    .hero-actions { display: flex; gap: 9px; flex-wrap: wrap; margin-bottom: 24px; }
+    .btn { padding: 9px 20px; border-radius: 4px; font-size: 13px; font-weight: 600; text-decoration: none; transition: opacity 0.15s, transform 0.15s; }
     .btn-dark { background: var(--accent); color: #fff; border: 1px solid var(--accent); }
-    .btn-outline { background: transparent; color: var(--mid); border: 1px solid var(--border); }
-    .btn:hover { opacity: 0.82; transform: translateY(-1px); }
-    .hero-socials { display: flex; gap: 8px; margin-bottom: 52px; }
-    .soc {
-      width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
-      border: 1px solid var(--border); border-radius: 4px; color: var(--dim);
-      text-decoration: none; background: var(--card); transition: all 0.18s;
-    }
+    .btn-ghost { background: transparent; color: var(--mid); border: 1px solid var(--border); }
+    .btn:hover { opacity: 0.8; transform: translateY(-1px); }
+    .hero-socials { display: flex; gap: 7px; margin-bottom: 44px; }
+    .soc { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); border-radius: 4px; color: var(--dim); text-decoration: none; background: var(--card); transition: all 0.15s; }
     .soc:hover { border-color: var(--accent); color: var(--accent); }
-    .hero-stats {
-      display: flex; gap: 32px; flex-wrap: wrap;
-      padding-top: 32px; border-top: 1px solid var(--border);
-    }
-    .stat-n { font-family: 'Lora', serif; font-size: 24px; font-weight: 700; color: var(--text); }
-    .stat-l { font-size: 11px; color: var(--dim); margin-top: 2px; letter-spacing: 0.3px; }
+    .hero-stats { display: flex; gap: 28px; flex-wrap: wrap; padding-top: 28px; border-top: 1px solid var(--border); }
+    .stat-n { font-family: 'Lora', serif; font-size: 22px; font-weight: 700; }
+    .stat-l { font-size: 11px; color: var(--dim); margin-top: 2px; }
 
-    /* SECTION */
-    section { padding: 72px 0; border-top: 1px solid var(--border); }
-    .s-label {
-      font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 3px;
-      text-transform: uppercase; color: var(--dim); margin-bottom: 8px;
-    }
-    .s-title { font-family: 'Lora', serif; font-size: clamp(22px, 3vw, 30px); font-weight: 700; margin-bottom: 8px; }
-    .s-sub { font-size: 14px; color: var(--mid); max-width: 500px; margin-bottom: 40px; }
+    /* hero illustration */
+    .hero-illustration { opacity: 0.85; }
+    .node-pulse { animation: nodepulse 2.4s ease-in-out infinite; }
+    @keyframes nodepulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+    .dash-line { stroke-dasharray: 5 4; animation: dash 2s linear infinite; }
+    @keyframes dash { to { stroke-dashoffset: -18; } }
 
-    /* TIMELINE */
+    /* ── SECTIONS ── */
+    section { padding: 64px 0; border-top: 1px solid var(--border); }
+    .s-head { display: flex; align-items: flex-start; gap: 18px; margin-bottom: 36px; }
+    .s-icon { width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 8px; background: var(--card); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .s-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--dim); margin-bottom: 4px; }
+    .s-title { font-family: 'Lora', serif; font-size: clamp(20px, 2.8vw, 28px); font-weight: 700; }
+    .s-sub { font-size: 13.5px; color: var(--mid); max-width: 480px; margin-top: 6px; }
+
+    /* ── TIMELINE ── */
     .tl { position: relative; }
     .tl::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--border); }
-    .tl-item { position: relative; padding-left: 36px; margin-bottom: 36px; }
-    .tl-dot {
-      position: absolute; left: -5px; top: 5px; width: 11px; height: 11px;
-      border-radius: 50%; background: var(--card); border: 2px solid var(--accent);
-    }
+    .tl-item { position: relative; padding-left: 34px; margin-bottom: 32px; }
+    .tl-dot { position: absolute; left: -5px; top: 5px; width: 11px; height: 11px; border-radius: 50%; background: var(--card); border: 2px solid var(--accent); }
     .tl-dot.past { border-color: var(--border); }
-    .tl-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 2px; flex-wrap: wrap; }
-    .tl-co { font-family: 'Lora', serif; font-size: 16px; font-weight: 700; }
-    .tl-badge {
-      font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 2px 7px;
-      border-radius: 3px; letter-spacing: 0.3px;
-    }
+    .tl-dot.current { box-shadow: 0 0 0 4px rgba(0,0,0,0.07); }
+    .tl-head { display: flex; align-items: baseline; gap: 9px; margin-bottom: 2px; flex-wrap: wrap; }
+    .tl-co { font-family: 'Lora', serif; font-size: 15px; font-weight: 700; }
+    .tl-badge { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; padding: 2px 7px; border-radius: 3px; }
     .b-now { background: rgba(0,0,0,0.06); color: var(--accent); border: 1px solid rgba(0,0,0,0.12); }
     .b-past { color: var(--dim); border: 1px solid var(--border); }
-    .tl-role { font-size: 13px; color: var(--mid); font-weight: 500; margin-bottom: 2px; }
-    .tl-date { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--dim); margin-bottom: 12px; }
-    .tl-card {
-      background: var(--card); border: 1px solid var(--border); border-radius: 6px;
-      padding: 18px 20px; box-shadow: 0 1px 6px rgba(0,0,0,0.05);
-    }
-    .tl-card ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .tl-role { font-size: 12.5px; color: var(--mid); font-weight: 500; margin-bottom: 2px; }
+    .tl-date { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--dim); margin-bottom: 11px; }
+    .tl-card { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 18px; box-shadow: 0 1px 5px rgba(0,0,0,0.05); }
+    .tl-card ul { list-style: none; display: flex; flex-direction: column; gap: 7px; }
     .tl-card li { font-size: 13px; color: var(--mid); line-height: 1.65; padding-left: 14px; position: relative; }
     .tl-card li::before { content: '–'; position: absolute; left: 0; color: var(--dim); }
     .tl-card li strong { color: var(--text); font-weight: 600; }
-    .tl-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
-    .tl-tag {
-      font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 2px 8px;
-      border-radius: 3px; background: var(--bg); border: 1px solid var(--border); color: var(--dim);
-    }
+    .tl-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 11px; }
+    .tl-tag { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; padding: 2px 7px; border-radius: 3px; background: var(--bg); border: 1px solid var(--border); color: var(--dim); }
 
-    /* SKILLS — inline compact */
-    .skills-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .sk-group { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 16px 18px; box-shadow: 0 1px 6px rgba(0,0,0,0.04); }
-    .sk-title { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--dim); margin-bottom: 10px; }
-    .sk-pills { display: flex; flex-wrap: wrap; gap: 6px; }
-    .sk-pill { font-size: 12px; padding: 3px 10px; border-radius: 20px; background: var(--bg); border: 1px solid var(--border); color: var(--mid); }
+    /* ── SKILLS ── */
+    .skills-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .sk-group { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; box-shadow: 0 1px 5px rgba(0,0,0,0.04); }
+    .sk-head { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+    .sk-icon { width: 26px; height: 26px; border: 1px solid var(--border); border-radius: 5px; display: flex; align-items: center; justify-content: center; background: var(--bg); flex-shrink: 0; }
+    .sk-title { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mid); }
+    .sk-pills { display: flex; flex-wrap: wrap; gap: 5px; }
+    .sk-pill { font-size: 11.5px; padding: 3px 9px; border-radius: 20px; background: var(--bg); border: 1px solid var(--border); color: var(--mid); }
 
-    /* PROJECTS — 2-col tight cards */
-    .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    /* ── PROJECTS ── */
+    .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .proj-card {
       background: var(--card); border: 1px solid var(--border); border-radius: 6px;
-      padding: 18px 20px; text-decoration: none; display: flex; flex-direction: column;
-      transition: border-color 0.18s, box-shadow 0.18s; box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+      padding: 18px; text-decoration: none; display: flex; flex-direction: column;
+      transition: border-color 0.15s, box-shadow 0.15s; box-shadow: 0 1px 5px rgba(0,0,0,0.04);
     }
-    .proj-card:hover { border-color: var(--accent); box-shadow: 0 4px 16px rgba(0,0,0,0.09); }
-    .proj-icon { font-size: 20px; margin-bottom: 10px; }
-    .proj-name { font-family: 'Lora', serif; font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 7px; line-height: 1.3; }
+    .proj-card:hover { border-color: #888; box-shadow: 0 4px 18px rgba(0,0,0,0.10); }
+    .proj-top { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .proj-icon-box {
+      width: 36px; height: 36px; border-radius: 7px; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; border: 1px solid var(--border); background: var(--bg);
+    }
+    .proj-name { font-family: 'Lora', serif; font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.3; }
     .proj-desc { font-size: 12px; color: var(--mid); line-height: 1.7; flex: 1; margin-bottom: 12px; }
     .proj-foot { display: flex; align-items: center; justify-content: space-between; }
-    .proj-tags { display: flex; gap: 5px; flex-wrap: wrap; }
-    .proj-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 2px 7px; border-radius: 3px; background: var(--bg); border: 1px solid var(--border); color: var(--dim); }
-    .proj-link { font-size: 11px; color: var(--accent); font-weight: 600; }
+    .proj-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+    .proj-tag { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; padding: 2px 6px; border-radius: 3px; background: var(--bg); border: 1px solid var(--border); color: var(--dim); }
+    .proj-link { font-size: 11px; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 4px; }
 
-    /* BLOG */
-    .blog-list { display: flex; flex-direction: column; gap: 1px; }
+    /* ── BLOG ── */
+    .blog-list { display: flex; flex-direction: column; gap: 10px; }
     .blog-row {
       background: var(--card); border: 1px solid var(--border); border-radius: 6px;
-      padding: 18px 20px; text-decoration: none; display: flex; align-items: flex-start;
-      gap: 16px; transition: border-color 0.18s; box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      padding: 16px 18px; text-decoration: none; display: flex; align-items: flex-start;
+      gap: 14px; transition: border-color 0.15s; box-shadow: 0 1px 4px rgba(0,0,0,0.04);
     }
-    .blog-row:hover { border-color: var(--accent); }
-    .blog-row + .blog-row { margin-top: 10px; }
-    .blog-tag-sm {
-      font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 1px;
-      text-transform: uppercase; color: var(--dim); white-space: nowrap;
-      padding: 3px 8px; border: 1px solid var(--border); border-radius: 3px; margin-top: 2px;
-    }
+    .blog-row:hover { border-color: #888; }
+    .blog-icon { width: 36px; height: 36px; border-radius: 6px; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .blog-body { flex: 1; }
-    .blog-title { font-family: 'Lora', serif; font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 5px; line-height: 1.4; }
-    .blog-desc { font-size: 12px; color: var(--mid); line-height: 1.65; margin-bottom: 8px; }
+    .blog-tag-sm { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(--dim); margin-bottom: 4px; display: block; }
+    .blog-title { font-family: 'Lora', serif; font-size: 13.5px; font-weight: 600; color: var(--text); margin-bottom: 4px; line-height: 1.4; }
+    .blog-desc { font-size: 12px; color: var(--mid); line-height: 1.6; margin-bottom: 6px; }
     .blog-meta { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--dim); }
-    .blog-arrow { font-size: 11px; color: var(--accent); font-weight: 600; white-space: nowrap; margin-top: 2px; }
+    .blog-arrow { font-size: 11px; color: var(--accent); font-weight: 700; white-space: nowrap; margin-top: 2px; display: flex; align-items: center; gap: 3px; }
 
-    /* EDU */
-    .edu-row {
-      background: var(--card); border: 1px solid var(--border); border-radius: 6px;
-      padding: 22px 24px; display: flex; gap: 18px; align-items: flex-start;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.04);
-    }
-    .edu-icon { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
-    .edu-name { font-family: 'Lora', serif; font-size: 16px; font-weight: 700; margin-bottom: 3px; }
-    .edu-deg { font-size: 13px; color: var(--mid); margin-bottom: 3px; }
-    .edu-yr { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--dim); margin-bottom: 10px; }
-    .edu-cw { font-size: 13px; color: var(--mid); line-height: 1.65; }
+    /* ── EDUCATION ── */
+    .edu-row { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 20px 22px; display: flex; gap: 16px; box-shadow: 0 1px 5px rgba(0,0,0,0.04); }
+    .edu-icon-box { width: 44px; height: 44px; border-radius: 8px; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .edu-name { font-family: 'Lora', serif; font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+    .edu-deg { font-size: 13px; color: var(--mid); margin-bottom: 2px; }
+    .edu-yr { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--dim); margin-bottom: 9px; }
+    .edu-cw { font-size: 12.5px; color: var(--mid); line-height: 1.65; }
 
-    /* AWARDS */
-    .awards-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .aw-card {
-      background: var(--card); border: 1px solid var(--border); border-radius: 6px;
-      padding: 16px 18px; display: flex; gap: 12px;
-      box-shadow: 0 1px 5px rgba(0,0,0,0.04);
-    }
-    .aw-icon { font-size: 20px; flex-shrink: 0; }
+    /* ── AWARDS ── */
+    .awards-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .aw-card { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 15px 16px; display: flex; gap: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+    .aw-icon-box { width: 36px; height: 36px; border-radius: 6px; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .aw-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
     .aw-desc { font-size: 12px; color: var(--mid); line-height: 1.6; }
 
-    /* CONTACT */
+    /* ── CONTACT ── */
     .contact-box {
       background: var(--card); border: 1px solid var(--border); border-radius: 8px;
-      padding: 44px 40px; text-align: center;
-      box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+      padding: 44px 40px; text-align: center; box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+      position: relative; overflow: hidden;
     }
-    .contact-box .s-title { margin-bottom: 8px; }
-    .contact-desc { font-size: 14px; color: var(--mid); max-width: 420px; margin: 0 auto 26px; line-height: 1.7; }
-    .contact-links { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-    .c-link {
-      display: flex; align-items: center; gap: 7px; padding: 9px 18px;
-      border: 1px solid var(--border); border-radius: 4px; font-size: 13px;
-      color: var(--mid); text-decoration: none; background: var(--bg); transition: all 0.18s;
-    }
-    .c-link:hover { border-color: var(--accent); color: var(--accent); }
+    .contact-bg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0.04; pointer-events: none; }
+    .contact-title { font-family: 'Lora', serif; font-size: 26px; font-weight: 700; margin-bottom: 10px; position: relative; }
+    .contact-desc { font-size: 13.5px; color: var(--mid); max-width: 400px; margin: 0 auto 24px; line-height: 1.75; position: relative; }
+    .contact-links { display: flex; gap: 9px; justify-content: center; flex-wrap: wrap; position: relative; }
+    .c-link { display: flex; align-items: center; gap: 7px; padding: 9px 16px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; color: var(--mid); text-decoration: none; background: var(--bg); transition: all 0.15s; }
+    .c-link:hover { border-color: var(--accent); color: var(--accent); background: var(--card); }
 
     /* FOOTER */
-    footer {
-      border-top: 1px solid var(--border); padding: 24px 0; text-align: center;
-      font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--dim);
-      position: relative; z-index: 1;
-    }
+    footer { border-top: 1px solid var(--border); padding: 22px 0; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--dim); position: relative; z-index: 1; }
 
     /* ANIM */
-    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .fade-up { opacity: 0; transform: translateY(18px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-    @media (max-width: 700px) {
-      nav { justify-content: flex-end; padding: 0 20px; }
-      .nav-links { gap: 20px; }
+    @media (max-width: 720px) {
+      nav { justify-content: flex-end; padding: 0 18px; }
       .nav-links li:not(:last-child) { display: none; }
-      .page { padding: 0 18px; }
-      .hero { padding: 86px 0 56px; }
-      .proj-grid { grid-template-columns: 1fr; }
-      .skills-cols { grid-template-columns: 1fr; }
-      .awards-cols { grid-template-columns: 1fr; }
-      .edu-row { flex-direction: column; gap: 10px; }
+      .page { padding: 0 16px; }
+      .hero { flex-direction: column; padding: 86px 0 52px; gap: 28px; }
+      .hero-right { width: 200px; }
+      .proj-grid, .skills-cols, .awards-cols { grid-template-columns: 1fr; }
+      .edu-row { flex-direction: column; }
       .contact-box { padding: 28px 18px; }
-      .hero-stats { gap: 20px; }
-      .blog-row { flex-direction: column; gap: 8px; }
+      .hero-stats { gap: 18px; }
     }
   </style>
 </head>
@@ -269,50 +231,107 @@
 
   <!-- HERO -->
   <div class="hero" id="about">
-    <div class="hero-eyebrow">AI/ML Engineer · Bangalore, India</div>
-    <h1>Pavan Sai<br>Kamatham</h1>
-    <p class="hero-sub">Senior Applied AI/ML Associate at <strong>JP Morgan Chase</strong></p>
-    <div class="hero-typing"><span id="typed-text"></span><span class="typing-cursor"></span></div>
-    <p class="hero-desc">6+ years building production-grade Agentic AI systems, LLM pipelines, and multi-agent architectures across Finance, Healthcare, and Technology. IIT Madras alumnus.</p>
-    <div class="hero-actions">
-      <a href="#projects" class="btn btn-dark">View Projects</a>
-      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    <div class="hero-left">
+      <div class="hero-eyebrow">AI/ML Engineer · Bangalore, India</div>
+      <h1>Pavan Sai<br>Kamatham</h1>
+      <p class="hero-sub">Senior Applied AI/ML Associate at <strong>JP Morgan Chase</strong></p>
+      <div class="hero-typing"><span id="typed-text"></span><span class="cursor"></span></div>
+      <p class="hero-desc">6+ years building production-grade Agentic AI systems, LLM pipelines, and multi-agent architectures across Finance, Healthcare, and Technology. IIT Madras alumnus.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-dark">View Projects</a>
+        <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+      </div>
+      <div class="hero-socials">
+        <a href="https://linkedin.com/in/kpavansai" target="_blank" class="soc" title="LinkedIn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+        </a>
+        <a href="https://github.com/kpavansai" target="_blank" class="soc" title="GitHub">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 002 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"/></svg>
+        </a>
+        <a href="https://kpavansai.medium.com" target="_blank" class="soc" title="Medium">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+        </a>
+        <a href="mailto:kpavan.sai1@gmail.com" class="soc" title="Email">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-n">6+</div><div class="stat-l">Years</div></div>
+        <div><div class="stat-n">3</div><div class="stat-l">Companies</div></div>
+        <div><div class="stat-n">10+</div><div class="stat-l">Projects</div></div>
+        <div><div class="stat-n">IIT</div><div class="stat-l">Madras</div></div>
+      </div>
     </div>
-    <div class="hero-socials">
-      <a href="https://linkedin.com/in/kpavansai" target="_blank" class="soc" title="LinkedIn">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
-      </a>
-      <a href="https://github.com/kpavansai" target="_blank" class="soc" title="GitHub">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 002 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"/></svg>
-      </a>
-      <a href="https://kpavansai.medium.com" target="_blank" class="soc" title="Medium">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
-      </a>
-      <a href="mailto:kpavan.sai1@gmail.com" class="soc" title="Email">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-      </a>
+
+    <!-- decorative network SVG -->
+    <div class="hero-right">
+      <svg class="hero-illustration" viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg" width="260" height="260">
+        <!-- outer ring -->
+        <circle cx="130" cy="130" r="118" stroke="#d0d0d0" stroke-width="1" stroke-dasharray="4 6"/>
+        <!-- mid ring -->
+        <circle cx="130" cy="130" r="78" stroke="#d8d8d8" stroke-width="1" stroke-dasharray="3 5"/>
+        <!-- spoke lines -->
+        <line x1="130" y1="12" x2="130" y2="52" stroke="#c8c8c8" stroke-width="1.5"/>
+        <line x1="248" y1="130" x2="208" y2="130" stroke="#c8c8c8" stroke-width="1.5"/>
+        <line x1="130" y1="248" x2="130" y2="208" stroke="#c8c8c8" stroke-width="1.5"/>
+        <line x1="12" y1="130" x2="52" y2="130" stroke="#c8c8c8" stroke-width="1.5"/>
+        <line x1="213" y1="47" x2="185" y2="75" stroke="#c8c8c8" stroke-width="1.5"/>
+        <line x1="47" y1="213" x2="75" y2="185" stroke="#c8c8c8" stroke-width="1.5"/>
+        <line x1="213" y1="213" x2="185" y2="185" stroke="#c8c8c8" stroke-width="1.5"/>
+        <line x1="47" y1="47" x2="75" y2="75" stroke="#c8c8c8" stroke-width="1.5"/>
+        <!-- animated dashed connector lines to center -->
+        <line class="dash-line" x1="130" y1="52" x2="130" y2="108" stroke="#b0b0b0" stroke-width="1.2" stroke-dasharray="4 4"/>
+        <line class="dash-line" x1="208" y1="130" x2="152" y2="130" stroke="#b0b0b0" stroke-width="1.2" stroke-dasharray="4 4"/>
+        <line class="dash-line" x1="130" y1="208" x2="130" y2="152" stroke="#b0b0b0" stroke-width="1.2" stroke-dasharray="4 4"/>
+        <line class="dash-line" x1="52" y1="130" x2="108" y2="130" stroke="#b0b0b0" stroke-width="1.2" stroke-dasharray="4 4"/>
+        <line class="dash-line" x1="185" y1="75" x2="153" y2="107" stroke="#b0b0b0" stroke-width="1.2" stroke-dasharray="4 4"/>
+        <line class="dash-line" x1="75" y1="185" x2="107" y2="153" stroke="#b0b0b0" stroke-width="1.2" stroke-dasharray="4 4"/>
+        <line class="dash-line" x1="185" y1="185" x2="153" y2="153" stroke="#b0b0b0" stroke-width="1.2" stroke-dasharray="4 4"/>
+        <line class="dash-line" x1="75" y1="75" x2="107" y2="107" stroke="#b0b0b0" stroke-width="1.2" stroke-dasharray="4 4"/>
+        <!-- outer nodes -->
+        <circle cx="130" cy="12" r="7" fill="#e8e8e8" stroke="#a0a0a0" stroke-width="1.5"/>
+        <circle cx="248" cy="130" r="7" fill="#e8e8e8" stroke="#a0a0a0" stroke-width="1.5"/>
+        <circle cx="130" cy="248" r="7" fill="#e8e8e8" stroke="#a0a0a0" stroke-width="1.5"/>
+        <circle cx="12" cy="130" r="7" fill="#e8e8e8" stroke="#a0a0a0" stroke-width="1.5"/>
+        <circle cx="213" cy="47" r="7" fill="#e8e8e8" stroke="#a0a0a0" stroke-width="1.5"/>
+        <circle cx="47" cy="213" r="7" fill="#e8e8e8" stroke="#a0a0a0" stroke-width="1.5"/>
+        <circle cx="213" cy="213" r="7" fill="#e8e8e8" stroke="#a0a0a0" stroke-width="1.5"/>
+        <circle cx="47" cy="47" r="7" fill="#e8e8e8" stroke="#a0a0a0" stroke-width="1.5"/>
+        <!-- mid nodes -->
+        <circle class="node-pulse" cx="130" cy="52" r="10" fill="#d4d4d4" stroke="#888" stroke-width="1.5"/>
+        <circle class="node-pulse" cx="208" cy="130" r="10" fill="#d4d4d4" stroke="#888" stroke-width="1.5" style="animation-delay:.6s"/>
+        <circle class="node-pulse" cx="130" cy="208" r="10" fill="#d4d4d4" stroke="#888" stroke-width="1.5" style="animation-delay:1.2s"/>
+        <circle class="node-pulse" cx="52" cy="130" r="10" fill="#d4d4d4" stroke="#888" stroke-width="1.5" style="animation-delay:1.8s"/>
+        <circle class="node-pulse" cx="185" cy="75" r="8" fill="#d4d4d4" stroke="#999" stroke-width="1.5" style="animation-delay:.3s"/>
+        <circle class="node-pulse" cx="75" cy="185" r="8" fill="#d4d4d4" stroke="#999" stroke-width="1.5" style="animation-delay:.9s"/>
+        <circle class="node-pulse" cx="185" cy="185" r="8" fill="#d4d4d4" stroke="#999" stroke-width="1.5" style="animation-delay:1.5s"/>
+        <circle class="node-pulse" cx="75" cy="75" r="8" fill="#d4d4d4" stroke="#999" stroke-width="1.5" style="animation-delay:2.1s"/>
+        <!-- center node -->
+        <circle cx="130" cy="130" r="22" fill="#1a1a1a" stroke="#111" stroke-width="2"/>
+        <text x="130" y="136" text-anchor="middle" fill="white" font-size="15" font-family="Inter,sans-serif" font-weight="600">AI</text>
+        <!-- inner ring on center -->
+        <circle cx="130" cy="130" r="30" fill="none" stroke="#555" stroke-width="0.8" stroke-dasharray="3 4" opacity="0.5"/>
+      </svg>
     </div>
-    <div class="hero-stats">
-      <div><div class="stat-n">6+</div><div class="stat-l">Years Experience</div></div>
-      <div><div class="stat-n">3</div><div class="stat-l">Companies</div></div>
-      <div><div class="stat-n">10+</div><div class="stat-l">GitHub Projects</div></div>
-      <div><div class="stat-n">IIT</div><div class="stat-l">Madras Alumnus</div></div>
-    </div>
-  </div>
+  </div><!-- /hero -->
 
   <!-- EXPERIENCE -->
   <section class="fade-up" id="experience">
-    <div class="s-label">Career Journey</div>
-    <h2 class="s-title">Work Experience</h2>
-    <p class="s-sub">Building production AI systems across finance, healthcare, and technology.</p>
+    <div class="s-head">
+      <div class="s-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" color="#555"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="12.01"/></svg>
+      </div>
+      <div>
+        <div class="s-label">Career Journey</div>
+        <div class="s-title">Work Experience</div>
+        <div class="s-sub">Building production AI systems across finance, healthcare, and technology.</div>
+      </div>
+    </div>
     <div class="tl">
 
       <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-head">
-          <span class="tl-co">JP Morgan Chase</span>
-          <span class="tl-badge b-now">Current</span>
-        </div>
+        <div class="tl-dot current"></div>
+        <div class="tl-head"><span class="tl-co">JP Morgan Chase</span><span class="tl-badge b-now">Current</span></div>
         <div class="tl-role">Senior Applied AI/ML Associate</div>
         <div class="tl-date">Aug 2024 – Present · Bangalore</div>
         <div class="tl-card">
@@ -320,55 +339,43 @@
             <li>Led and mentored <strong>3 interns</strong> through AI architectures, agentic workflows, and AzureOpenAI integrations.</li>
             <li>Designing a <strong>Multi-Agent system</strong> connecting Confluence MCP server to generate synthetic knowledge using meta-prompting.</li>
             <li>Built custom <strong>MCP servers</strong> to enhance tool calling and minimize direct database queries.</li>
-            <li>Developed a customized <strong>LLM-metadata logging module</strong> for accountability and usage analytics across agentic interactions.</li>
+            <li>Developed a <strong>LLM-metadata logging module</strong> for accountability and usage analytics across agentic interactions.</li>
             <li>Revamped multi-agent workflows using <strong>LangGraph</strong> with hybrid routing (semantic + supervisor).</li>
             <li>Researched and implemented <strong>Agentic RAG retrieval system</strong> with optimized indexing and embedding strategies.</li>
           </ul>
-          <div class="tl-tags">
-            <span class="tl-tag">Multi-Agent</span><span class="tl-tag">MCP Servers</span><span class="tl-tag">LangGraph</span><span class="tl-tag">AzureOpenAI</span><span class="tl-tag">Agentic RAG</span><span class="tl-tag">Claude Code</span>
-          </div>
+          <div class="tl-tags"><span class="tl-tag">Multi-Agent</span><span class="tl-tag">MCP Servers</span><span class="tl-tag">LangGraph</span><span class="tl-tag">AzureOpenAI</span><span class="tl-tag">Agentic RAG</span><span class="tl-tag">Claude Code</span></div>
         </div>
       </div>
 
       <div class="tl-item">
         <div class="tl-dot past"></div>
-        <div class="tl-head">
-          <span class="tl-co">Carelon Global Solutions</span>
-          <span class="tl-badge b-past">Oct 2022 – Jul 2024</span>
-        </div>
+        <div class="tl-head"><span class="tl-co">Carelon Global Solutions</span><span class="tl-badge b-past">Oct 2022 – Jul 2024</span></div>
         <div class="tl-role">Software Engineer III (AI)</div>
         <div class="tl-date">Oct 2022 – Jul 2024 · Bangalore</div>
         <div class="tl-card">
           <ul>
             <li>Built <strong>RAG-Evaluation framework</strong> for retrieval assessment and re-ranking for healthcare claim documents.</li>
             <li>Designed end-to-end <strong>Healthcare Claims Analyzer</strong> achieving <strong>88% precision</strong> in claim classification.</li>
-            <li>Enhanced async API calls in <strong>AI Claims Examiner</strong> automating processing for <strong>~50,000 claims/day</strong>.</li>
+            <li>Enhanced async API calls in <strong>AI Claims Examiner</strong> automating <strong>~50,000 claims/day</strong>.</li>
             <li>Architected data pipelines to extract, transform, and store patient-care data in <strong>MongoDB</strong>.</li>
           </ul>
-          <div class="tl-tags">
-            <span class="tl-tag">RAG</span><span class="tl-tag">AzureOpenAI</span><span class="tl-tag">Transformers</span><span class="tl-tag">Healthcare AI</span><span class="tl-tag">MongoDB</span>
-          </div>
+          <div class="tl-tags"><span class="tl-tag">RAG</span><span class="tl-tag">AzureOpenAI</span><span class="tl-tag">Transformers</span><span class="tl-tag">Healthcare AI</span><span class="tl-tag">MongoDB</span></div>
         </div>
       </div>
 
       <div class="tl-item">
         <div class="tl-dot past"></div>
-        <div class="tl-head">
-          <span class="tl-co">Virtusa Consulting Services</span>
-          <span class="tl-badge b-past">Jul 2019 – Sep 2022</span>
-        </div>
+        <div class="tl-head"><span class="tl-co">Virtusa Consulting Services</span><span class="tl-badge b-past">Jul 2019 – Sep 2022</span></div>
         <div class="tl-role">Associate Consultant (AI/ML)</div>
         <div class="tl-date">Jul 2019 – Sep 2022 · Hyderabad</div>
         <div class="tl-card">
           <ul>
-            <li>Led a team of <strong>6 ML interns</strong> developing end-to-end AI-enabled proof-of-concept solutions.</li>
+            <li>Led a team of <strong>6 ML interns</strong> developing end-to-end AI-enabled solutions.</li>
             <li>Built <strong>Auto-Triaging system</strong> using Transformers, boosting accuracy from <strong>69% → 81%</strong>.</li>
             <li>Built in-house <strong>AI-Observability platform</strong> to monitor production ML models.</li>
             <li>Deployed ML models to <strong>Google Cloud</strong> with end-to-end MLOps pipelines.</li>
           </ul>
-          <div class="tl-tags">
-            <span class="tl-tag">NLP</span><span class="tl-tag">Transformers</span><span class="tl-tag">Google Cloud</span><span class="tl-tag">MLOps</span><span class="tl-tag">Kubeflow</span>
-          </div>
+          <div class="tl-tags"><span class="tl-tag">NLP</span><span class="tl-tag">Transformers</span><span class="tl-tag">Google Cloud</span><span class="tl-tag">MLOps</span><span class="tl-tag">Kubeflow</span></div>
         </div>
       </div>
 
@@ -377,101 +384,151 @@
 
   <!-- SKILLS -->
   <section class="fade-up" id="skills">
-    <div class="s-label">Toolkit</div>
-    <h2 class="s-title">Skills & Technologies</h2>
-    <p class="s-sub">6+ years of production AI/ML engineering across the full stack.</p>
+    <div class="s-head">
+      <div class="s-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" color="#555"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </div>
+      <div>
+        <div class="s-label">Toolkit</div>
+        <div class="s-title">Skills & Technologies</div>
+        <div class="s-sub">6+ years of production AI/ML engineering across the full stack.</div>
+      </div>
+    </div>
     <div class="skills-cols">
       <div class="sk-group">
-        <div class="sk-title">Core AI/ML</div>
-        <div class="sk-pills">
-          <span class="sk-pill">Generative AI</span><span class="sk-pill">LLMs</span><span class="sk-pill">NLP</span><span class="sk-pill">Machine Learning</span><span class="sk-pill">Deep Learning</span><span class="sk-pill">RAG Systems</span><span class="sk-pill">Agentic AI</span><span class="sk-pill">Multi-Agent</span>
+        <div class="sk-head">
+          <div class="sk-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+          </div>
+          <span class="sk-title">Core AI/ML</span>
         </div>
+        <div class="sk-pills"><span class="sk-pill">Generative AI</span><span class="sk-pill">LLMs</span><span class="sk-pill">NLP</span><span class="sk-pill">Machine Learning</span><span class="sk-pill">Deep Learning</span><span class="sk-pill">RAG Systems</span><span class="sk-pill">Agentic AI</span><span class="sk-pill">Multi-Agent</span></div>
       </div>
       <div class="sk-group">
-        <div class="sk-title">AI Frameworks</div>
-        <div class="sk-pills">
-          <span class="sk-pill">LangChain</span><span class="sk-pill">LangGraph</span><span class="sk-pill">LlamaIndex</span><span class="sk-pill">HuggingFace</span><span class="sk-pill">OpenAI SDK</span><span class="sk-pill">TensorFlow</span><span class="sk-pill">Scikit-Learn</span><span class="sk-pill">Claude Code</span>
+        <div class="sk-head">
+          <div class="sk-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <span class="sk-title">AI Frameworks</span>
         </div>
+        <div class="sk-pills"><span class="sk-pill">LangChain</span><span class="sk-pill">LangGraph</span><span class="sk-pill">LlamaIndex</span><span class="sk-pill">HuggingFace</span><span class="sk-pill">OpenAI SDK</span><span class="sk-pill">TensorFlow</span><span class="sk-pill">Scikit-Learn</span><span class="sk-pill">Claude Code</span></div>
       </div>
       <div class="sk-group">
-        <div class="sk-title">Cloud & MLOps</div>
-        <div class="sk-pills">
-          <span class="sk-pill">Azure OpenAI</span><span class="sk-pill">Google Cloud</span><span class="sk-pill">Kubeflow</span><span class="sk-pill">Kubernetes</span><span class="sk-pill">Airflow</span><span class="sk-pill">Terraform</span><span class="sk-pill">GKE</span><span class="sk-pill">MLOps</span>
+        <div class="sk-head">
+          <div class="sk-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <span class="sk-title">Cloud & MLOps</span>
         </div>
+        <div class="sk-pills"><span class="sk-pill">Azure OpenAI</span><span class="sk-pill">Google Cloud</span><span class="sk-pill">Kubeflow</span><span class="sk-pill">Kubernetes</span><span class="sk-pill">Airflow</span><span class="sk-pill">Terraform</span><span class="sk-pill">GKE</span><span class="sk-pill">MLOps</span></div>
       </div>
       <div class="sk-group">
-        <div class="sk-title">Data & Tools</div>
-        <div class="sk-pills">
-          <span class="sk-pill">Python</span><span class="sk-pill">SQL</span><span class="sk-pill">FastAPI</span><span class="sk-pill">Streamlit</span><span class="sk-pill">MongoDB</span><span class="sk-pill">Snowflake</span><span class="sk-pill">PostgreSQL</span><span class="sk-pill">MySQL</span>
+        <div class="sk-head">
+          <div class="sk-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <span class="sk-title">Data & Tools</span>
         </div>
+        <div class="sk-pills"><span class="sk-pill">Python</span><span class="sk-pill">SQL</span><span class="sk-pill">FastAPI</span><span class="sk-pill">Streamlit</span><span class="sk-pill">MongoDB</span><span class="sk-pill">Snowflake</span><span class="sk-pill">PostgreSQL</span><span class="sk-pill">MySQL</span></div>
       </div>
     </div>
   </section>
 
   <!-- PROJECTS -->
   <section class="fade-up" id="projects">
-    <div class="s-label">Things I've Built</div>
-    <h2 class="s-title">Featured Projects</h2>
-    <p class="s-sub">Production AI systems and research projects.</p>
+    <div class="s-head">
+      <div class="s-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" color="#555"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      </div>
+      <div>
+        <div class="s-label">Things I've Built</div>
+        <div class="s-title">Featured Projects</div>
+        <div class="s-sub">Production AI systems and research projects.</div>
+      </div>
+    </div>
     <div class="proj-grid">
 
       <a href="https://kpavansai.github.io/aiops-rca-guides/" target="_blank" class="proj-card">
-        <div class="proj-icon">🔍</div>
-        <div class="proj-name">AIOps RCA Multi-Agent System</div>
-        <div class="proj-desc">Interactive guides for multi-agent root cause analysis. Beam Search + Shared Blackboard, Bidirectional A* with live heuristics. 17 peer-reviewed citations. Live on GitHub Pages.</div>
+        <div class="proj-top">
+          <div class="proj-icon-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <div class="proj-name">AIOps RCA Multi-Agent System</div>
+        </div>
+        <div class="proj-desc">Interactive guides for multi-agent root cause analysis. Beam Search + Shared Blackboard, Bidirectional A* with live heuristics. 17 peer-reviewed citations.</div>
         <div class="proj-foot">
-          <div class="proj-tags"><span class="proj-tag">Multi-Agent</span><span class="proj-tag">Claude Code</span><span class="proj-tag">AIOps</span></div>
-          <span class="proj-link">Live →</span>
+          <div class="proj-tags"><span class="proj-tag">Multi-Agent</span><span class="proj-tag">Claude Code</span></div>
+          <span class="proj-link">Live ↗</span>
         </div>
       </a>
 
       <a href="https://github.com/kpavansai/climate-constellation" target="_blank" class="proj-card">
-        <div class="proj-icon">🌍</div>
-        <div class="proj-name">Climate Constellation</div>
-        <div class="proj-desc">Parallel multi-agent climate intelligence dashboard. Specialized agents analyze climate data from diverse sources, aggregating insights into a unified view.</div>
+        <div class="proj-top">
+          <div class="proj-icon-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          </div>
+          <div class="proj-name">Climate Constellation</div>
+        </div>
+        <div class="proj-desc">Parallel multi-agent climate intelligence dashboard. Specialized agents analyze climate data from diverse sources simultaneously.</div>
         <div class="proj-foot">
           <div class="proj-tags"><span class="proj-tag">Agents</span><span class="proj-tag">Climate AI</span></div>
-          <span class="proj-link">GitHub →</span>
+          <span class="proj-link">GitHub ↗</span>
         </div>
       </a>
 
       <a href="https://github.com/kpavansai/Deploy-Machine-Learning-Model-on-Kubernetes" target="_blank" class="proj-card">
-        <div class="proj-icon">⚙️</div>
-        <div class="proj-name">ML Model on Kubernetes</div>
-        <div class="proj-desc">End-to-end ML model deployment using Kubernetes. Production MLOps patterns: containerization, auto-scaling, health checks, and rolling updates.</div>
+        <div class="proj-top">
+          <div class="proj-icon-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/><path d="M15.54 8.46a5 5 0 010 7.07M8.46 8.46a5 5 0 000 7.07"/></svg>
+          </div>
+          <div class="proj-name">ML Model on Kubernetes</div>
+        </div>
+        <div class="proj-desc">End-to-end ML model deployment using Kubernetes. Production MLOps: containerization, auto-scaling, health checks, rolling updates.</div>
         <div class="proj-foot">
           <div class="proj-tags"><span class="proj-tag">Kubernetes</span><span class="proj-tag">MLOps</span></div>
-          <span class="proj-link">GitHub →</span>
+          <span class="proj-link">GitHub ↗</span>
         </div>
       </a>
 
       <a href="https://github.com/kpavansai/text-summarizer" target="_blank" class="proj-card">
-        <div class="proj-icon">📝</div>
-        <div class="proj-name">LLM Text Summarizer</div>
+        <div class="proj-top">
+          <div class="proj-icon-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <div class="proj-name">LLM Text Summarizer</div>
+        </div>
         <div class="proj-desc">Abstractive text summarization using HuggingFace transformer models. Configurable length controls and multiple document format support.</div>
         <div class="proj-foot">
           <div class="proj-tags"><span class="proj-tag">HuggingFace</span><span class="proj-tag">NLP</span></div>
-          <span class="proj-link">GitHub →</span>
+          <span class="proj-link">GitHub ↗</span>
         </div>
       </a>
 
       <a href="https://github.com/kpavansai/Image-Captioning-Analysis" target="_blank" class="proj-card">
-        <div class="proj-icon">🖼️</div>
-        <div class="proj-name">Image Captioning Analysis</div>
-        <div class="proj-desc">Deep learning image captioning combining CNN feature extraction with sequence generation. BLEU/METEOR evaluation and attention map visualization.</div>
+        <div class="proj-top">
+          <div class="proj-icon-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          </div>
+          <div class="proj-name">Image Captioning Analysis</div>
+        </div>
+        <div class="proj-desc">Deep learning image captioning combining CNN feature extraction with sequence generation. BLEU/METEOR evaluation and attention visualization.</div>
         <div class="proj-foot">
           <div class="proj-tags"><span class="proj-tag">Computer Vision</span><span class="proj-tag">CNN</span></div>
-          <span class="proj-link">GitHub →</span>
+          <span class="proj-link">GitHub ↗</span>
         </div>
       </a>
 
       <a href="https://github.com/kpavansai/Terraform-GKE-Modules" target="_blank" class="proj-card">
-        <div class="proj-icon">🏗️</div>
-        <div class="proj-name">Terraform GKE Modules</div>
-        <div class="proj-desc">Reusable Terraform modules for Google Kubernetes Engine. Node pool configs, networking, IAM roles, and auto-scaling for production deployments.</div>
+        <div class="proj-top">
+          <div class="proj-icon-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          </div>
+          <div class="proj-name">Terraform GKE Modules</div>
+        </div>
+        <div class="proj-desc">Reusable Terraform modules for Google Kubernetes Engine. Node pool configs, networking, IAM roles, auto-scaling for production deployments.</div>
         <div class="proj-foot">
           <div class="proj-tags"><span class="proj-tag">Terraform</span><span class="proj-tag">GKE</span></div>
-          <span class="proj-link">GitHub →</span>
+          <span class="proj-link">GitHub ↗</span>
         </div>
       </a>
 
@@ -480,39 +537,55 @@
 
   <!-- BLOG -->
   <section class="fade-up" id="blog">
-    <div class="s-label">Thoughts & Research</div>
-    <h2 class="s-title">Blog & Writing</h2>
-    <p class="s-sub">Published on <a href="https://kpavansai.medium.com" target="_blank" style="color:var(--accent);text-decoration:none;">Medium ↗</a> and GitHub Pages.</p>
+    <div class="s-head">
+      <div class="s-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" color="#555"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
+      <div>
+        <div class="s-label">Thoughts & Research</div>
+        <div class="s-title">Blog & Writing</div>
+        <div class="s-sub">Published on <a href="https://kpavansai.medium.com" target="_blank" style="color:var(--accent);text-decoration:none;">Medium ↗</a> and GitHub Pages.</div>
+      </div>
+    </div>
     <div class="blog-list">
 
       <a href="https://kpavansai.medium.com/why-multi-agent-aiops-rca-fails-at-scale-and-how-a-beam-search-and-shared-blackboards-fix-it-25ddac45d3a2" target="_blank" class="blog-row">
-        <span class="blog-tag-sm">AIOps</span>
+        <div class="blog-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        </div>
         <div class="blog-body">
+          <span class="blog-tag-sm">AIOps · Multi-Agent</span>
           <div class="blog-title">Why Multi-Agent AIOps RCA Fails at Scale — And How Beam Search & Shared Blackboards Fix It</div>
-          <div class="blog-desc">Covers Bidirectional Dijkstra, Beam Search with shared blackboard state, and Bidirectional A* with live heuristics — research-backed architectures.</div>
+          <div class="blog-desc">Covers Bidirectional Dijkstra, Beam Search with shared blackboard, and Bidirectional A* with live heuristics — research-backed architectures for production.</div>
           <div class="blog-meta">Apr 2026 · 21 min read</div>
         </div>
-        <span class="blog-arrow">Medium →</span>
+        <span class="blog-arrow">Medium ↗</span>
       </a>
 
       <a href="https://kpavansai.github.io/aiops-rca-guides/aiops-rca-architecture.html" target="_blank" class="blog-row">
-        <span class="blog-tag-sm">Guide</span>
+        <div class="blog-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        </div>
         <div class="blog-body">
+          <span class="blog-tag-sm">Interactive Guide</span>
           <div class="blog-title">RCA Agent Architecture Comparison — Interactive Visual Reference</div>
           <div class="blog-desc">Interactive tabbed guide comparing 4 multi-agent RCA architectures with live performance metrics, SVG flow diagrams, and a decision matrix.</div>
           <div class="blog-meta">Apr 2026 · Interactive</div>
         </div>
-        <span class="blog-arrow">Explore →</span>
+        <span class="blog-arrow">Explore ↗</span>
       </a>
 
       <a href="https://kpavansai.github.io/aiops-rca-guides/aiops-rca-complete-guide.html" target="_blank" class="blog-row">
-        <span class="blog-tag-sm">Research</span>
+        <div class="blog-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
         <div class="blog-body">
+          <span class="blog-tag-sm">Research · Deep Dive</span>
           <div class="blog-title">Search Algorithms for Multi-Agent AIOps RCA: Complete Technical Guide</div>
           <div class="blog-desc">11-section deep dive with production Claude Code architecture, token cost optimizations, and 17 citations from ICLR, WWW, NeurIPS, and Springer.</div>
           <div class="blog-meta">Apr 2026 · 35 min read</div>
         </div>
-        <span class="blog-arrow">Read →</span>
+        <span class="blog-arrow">Read ↗</span>
       </a>
 
     </div>
@@ -520,10 +593,19 @@
 
   <!-- EDUCATION -->
   <section class="fade-up" id="education">
-    <div class="s-label">Academic Background</div>
-    <h2 class="s-title">Education</h2>
+    <div class="s-head">
+      <div class="s-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" color="#555"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+      </div>
+      <div>
+        <div class="s-label">Academic Background</div>
+        <div class="s-title">Education</div>
+      </div>
+    </div>
     <div class="edu-row">
-      <div class="edu-icon">🎓</div>
+      <div class="edu-icon-box">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+      </div>
       <div>
         <div class="edu-name">Indian Institute of Technology (IIT), Madras</div>
         <div class="edu-deg">B.Tech in Aerospace Engineering</div>
@@ -535,18 +617,29 @@
 
   <!-- AWARDS -->
   <section class="fade-up">
-    <div class="s-label">Recognition</div>
-    <h2 class="s-title">Awards</h2>
+    <div class="s-head">
+      <div class="s-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" color="#555"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+      </div>
+      <div>
+        <div class="s-label">Recognition</div>
+        <div class="s-title">Awards</div>
+      </div>
+    </div>
     <div class="awards-cols">
       <div class="aw-card">
-        <div class="aw-icon">🚀</div>
+        <div class="aw-icon-box">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
         <div>
           <div class="aw-title">Carelon Innovation Team — Core Member</div>
           <div class="aw-desc">Selected to lead GenAI exploration and delivery for healthcare in 2023.</div>
         </div>
       </div>
       <div class="aw-card">
-        <div class="aw-icon">🏆</div>
+        <div class="aw-icon-box">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
         <div>
           <div class="aw-title">Top Performer Bonus — Virtusa (2021–22)</div>
           <div class="aw-desc">Recognised for high-impact AI solutions delivery at Virtusa Consulting.</div>
@@ -558,12 +651,15 @@
   <!-- CONTACT -->
   <section class="fade-up" id="contact">
     <div class="contact-box">
+      <div class="contact-bg">
+        <svg viewBox="0 0 400 200" width="400"><circle cx="200" cy="100" r="90" stroke="#111" stroke-width="1" fill="none"/><circle cx="200" cy="100" r="60" stroke="#111" stroke-width="0.7" fill="none"/><circle cx="200" cy="100" r="30" stroke="#111" stroke-width="0.5" fill="none"/><line x1="110" y1="100" x2="290" y2="100" stroke="#111" stroke-width="0.6"/><line x1="200" y1="10" x2="200" y2="190" stroke="#111" stroke-width="0.6"/></svg>
+      </div>
       <div class="s-label" style="margin-bottom:10px;">Let's Connect</div>
-      <h2 class="s-title">Get In Touch</h2>
+      <div class="contact-title">Get In Touch</div>
       <p class="contact-desc">Open to senior AI/ML roles, research collaborations, and conversations about agentic AI and production LLM systems.</p>
       <div class="contact-links">
         <a href="mailto:kpavan.sai1@gmail.com" class="c-link">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           Email
         </a>
         <a href="https://linkedin.com/in/kpavansai" target="_blank" class="c-link">
@@ -582,38 +678,18 @@
     </div>
   </section>
 
-  <footer>
-    Pavan Sai Kamatham · JP Morgan Chase · IIT Madras · Bangalore
-  </footer>
+  <footer>Pavan Sai Kamatham · JP Morgan Chase · IIT Madras · Bangalore</footer>
 
-</div><!-- /page -->
+</div>
 
 <script>
-  const phrases = [
-    'Building multi-agent AI systems...',
-    'Designing Agentic RAG pipelines...',
-    'Engineering LLMs @ JP Morgan Chase...',
-    'IIT Madras · B.Tech Aerospace Engineering...',
-    'LangGraph · LangChain · Claude Code...',
-    'Turning research into production AI...',
-  ];
-  let pi = 0, ci = 0, del = false;
-  const el = document.getElementById('typed-text');
-  function type() {
-    const w = phrases[pi];
-    if (!del) {
-      el.textContent = w.slice(0, ++ci);
-      if (ci === w.length) { del = true; setTimeout(type, 1800); return; }
-    } else {
-      el.textContent = w.slice(0, --ci);
-      if (ci === 0) { del = false; pi = (pi + 1) % phrases.length; }
-    }
-    setTimeout(type, del ? 38 : 65);
-  }
+  const phrases = ['Building multi-agent AI systems...','Designing Agentic RAG pipelines...','Engineering LLMs @ JP Morgan Chase...','IIT Madras · B.Tech Aerospace Engineering...','LangGraph · LangChain · Claude Code...','Turning research into production AI...'];
+  let pi=0,ci=0,del=false;
+  const el=document.getElementById('typed-text');
+  function type(){const w=phrases[pi];if(!del){el.textContent=w.slice(0,++ci);if(ci===w.length){del=true;setTimeout(type,1800);return;}}else{el.textContent=w.slice(0,--ci);if(ci===0){del=false;pi=(pi+1)%phrases.length;}}setTimeout(type,del?38:65);}
   type();
-
-  const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.08 });
-  document.querySelectorAll('.fade-up').forEach(e => obs.observe(e));
+  const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.08});
+  document.querySelectorAll('.fade-up').forEach(e=>obs.observe(e));
 </script>
 </body>
 </html>
